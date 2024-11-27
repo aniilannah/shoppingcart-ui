@@ -32,9 +32,24 @@
       </tr>
       </tbody>
     </table>
+    <form @submit.prevent="applyDiscount" class="row mb-3">
+      <div class="col">
+        <input
+            v-model="hasMembership"
+            type="checkbox"
+            id="membership"
+            class="form-check-input"
+        />
+        <label for="membership" class="form-check-label ms-2">
+          Apply Membership Discount
+        </label>
+      </div>
+      <div class="col">
+        <button class="btn btn-warning btn-sm">Apply Discount</button>
+      </div>
+    </form>
 
     <h3 class="mt-4">Total: ${{ cartTotal.toFixed(2) }}</h3>
-
   </div>
 </template>
 
@@ -47,6 +62,8 @@ export default {
     newProduct: { name: "", quantity: 1, price: 0, },
     cartItems: [],
     cartTotal: 0,
+    hasMembership: false,
+    discount: 0,
   }),
   methods: {
     fetchCart() {
@@ -62,8 +79,20 @@ export default {
 
     addProduct() {
       axios.post(`${this.api}/add-product`, this.newProduct).then(this.fetchCart);
-      this.newProduct={name: "", quantity: 1, price:0};
-    }
+      this.newProduct = {name: "", quantity: 1, price: 0};
+    },
+    applyDiscount() {
+      axios
+          .post(`${this.api}/apply-discount`, null, {
+            params: { hasMembership: this.hasMembership }
+      })
+          .then(res => {
+            this.cartTotal = res.data;
+          })
+          .catch(error => {
+            console.error("Error applying discount:", error);
+          });
+    },
   },
   mounted() {
     this.fetchCart();
@@ -72,5 +101,8 @@ export default {
 </script>
 
 
-<!--<style>-->
-<!--</style>-->
+<style>
+.btn-success {
+  border: 1px solid #FF69B4 !important;
+}
+</style>
