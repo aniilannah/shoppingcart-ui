@@ -1,12 +1,17 @@
 <template>
   <div class="container mt-4">
-    <h1 class="text-center mb-4">Shopping Cart</h1>
+    <h1 class="text-center mb-4">Shopping Cart  <i class="fa fa-shopping-cart" style="font-size:36px;color:darkolivegreen"></i></h1>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <br>
 
     <form @submit.prevent="addProduct" class="row mb-3">
       <input v-model="newProduct.name" placeholder="Product" class="form-control col" required />
       <input v-model.number="newProduct.quantity"  type="number" placeholder="Qty" class="form-control col" required />
       <input v-model.number="newProduct.price" type="number" step="0.01" placeholder="Price" class="form-control col" required />
-      <button class="btn btn-success col">Add</button>
+      <button class="btn col custom-btn">Add</button>
     </form>
 
     <table class="table">
@@ -101,8 +106,23 @@ export default {
 </script>
 
 
-<style>
-.btn-success {
-  border: 1px solid #FF69B4 !important;
+<style scoped>
+.custom-btn {
+  background-color:#bf8f73;
+  color: white;
+  border: none;
 }
+.btn-danger {
+  background-color:#824a4b;
+  color: white;
+  border: none;
+}
+
+.btn-warning {
+  background-color:#889d48;
+  color: white;
+  border: none;
+}
+
+
 </style>
