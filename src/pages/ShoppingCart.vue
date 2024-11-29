@@ -2,8 +2,10 @@
   <div class="container mt-4 boho-container">
     <h1 class="text-center mb-4 boho-header">
       Shopping Cart
-      <i class="fa fa-shopping-cart" style="font-size:36px;color:#c27b7d"></i>
     </h1>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <AddProductForm @update-cart="fetchCart" />
     <CartTable :cartItems="cartItems" @update-cart="fetchCart" />
@@ -49,15 +51,15 @@ export default {
   },
   methods: {
     async fetchCart() {
-      this.cartItems = await fetchCartItems();  // Get updated cart items
-      this.cartTotal = await fetchCartTotal();  // Get updated cart total
+      this.cartItems = await fetchCartItems();
+      this.cartTotal = await fetchCartTotal();
     },
     async applyDiscount() {
-      this.cartTotal = await applyDiscount(this.hasMembership);  // Apply discount and update total
+      this.cartTotal = await applyDiscount(this.hasMembership);
     }
   },
   mounted() {
-    this.fetchCart();  // Fetch cart data when component is mounted
+    this.fetchCart();
   }
 };
 </script>
@@ -72,7 +74,9 @@ body {
   color: #4d3b3b;
   position: relative;
 }
-
+.btn-warning:hover {
+  transform: translateY(-3px);
+  box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.2); }
 /* Floral Frame for Decoration */
 .boho-container {
   border: 2px solid #ecc6ba;
